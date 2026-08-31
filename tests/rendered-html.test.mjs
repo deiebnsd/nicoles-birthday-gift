@@ -33,6 +33,9 @@ test("renders Nicole's birthday gift metadata and content", async () => {
   assert.match(html, /<title>Nicole&#x27;s birthday gift<\/title>/i);
   assert.match(html, /Lets see you not know what/i);
   assert.match(html, /Pink palette/i);
+  assert.match(html, /Recipe type/i);
+  assert.match(html, /Desserts/i);
+  assert.match(html, /Savory/i);
   assert.match(html, /<html[^>]*data-theme="pink"/i);
   assert.match(html, /aria-label="Use green color scheme"/i);
   assert.match(html, /aria-pressed="true"/i);

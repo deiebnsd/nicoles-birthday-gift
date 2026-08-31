@@ -3,9 +3,11 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { ADDITIONAL_RECIPES, ADDITIONAL_STEPS, DAGS_NOTES, QUANTITIES, STAPLE_QUANTITIES } from "./recipe-data";
+import { DESSERT_NOTES, DESSERT_QUANTITIES, DESSERT_RECIPES, DESSERT_STAPLE_QUANTITIES, DESSERT_STEPS, DESSERT_SWAPS } from "./dessert-data";
 
 type PantryState = "have" | "avoid" | undefined;
 type ColorScheme = "garden" | "pink";
+type FoodMode = "savory" | "dessert";
 
 type Recipe = {
   id: string;
@@ -19,7 +21,7 @@ type Recipe = {
   accent: string;
 };
 
-const RECIPES: Recipe[] = [
+const SAVORY_RECIPES: Recipe[] = [
   {
     id: "lemon-butter-beans",
     title: "Creamy lemon butter beans",
@@ -89,9 +91,10 @@ const RECIPES: Recipe[] = [
   ...ADDITIONAL_RECIPES,
 ];
 
-const PANTRY_INGREDIENTS = Array.from(
-  new Set(RECIPES.flatMap((recipe) => recipe.ingredients)),
-).sort((a, b) => a.localeCompare(b));
+const ALL_RECIPES: Recipe[] = [...SAVORY_RECIPES, ...DESSERT_RECIPES];
+const ALL_QUANTITIES: Record<string, string[]> = { ...QUANTITIES, ...DESSERT_QUANTITIES };
+const ALL_STAPLE_QUANTITIES: Record<string, string[]> = { ...STAPLE_QUANTITIES, ...DESSERT_STAPLE_QUANTITIES };
+const ALL_NOTES: Record<string, string> = { ...DAGS_NOTES, ...DESSERT_NOTES };
 
 const DEFAULT_PANTRY: Record<string, PantryState> = {
   chickpeas: "have", spinach: "have", tomatoes: "have", garlic: "have",
@@ -252,6 +255,7 @@ const STEPS: Record<string, string[]> = {
     "Taste the broth, adding a splash of water if it is too strong. Finish with sesame oil, green spring-onion slices and sesame seeds, then serve immediately in deep bowls.",
   ],
   ...ADDITIONAL_STEPS,
+  ...DESSERT_STEPS,
 };
 
 function LeafMark() {
@@ -311,6 +315,7 @@ export default function Home() {
   const [pantryReady, setPantryReady] = useState(false);
   const [portions, setPortions] = useState(2);
   const [colorScheme, setColorScheme] = useState<ColorScheme>("pink");
+  const [foodMode, setFoodMode] = useState<FoodMode>("savory");
 
   const have = useMemo(
     () => new Set(Object.keys(pantry).filter((item) => pantry[item] === "have")),
@@ -321,8 +326,14 @@ export default function Home() {
     [pantry],
   );
 
+  const activeRecipes = foodMode === "savory" ? SAVORY_RECIPES : DESSERT_RECIPES;
+  const pantryIngredients = useMemo(
+    () => Array.from(new Set(activeRecipes.flatMap((recipe) => recipe.ingredients))).sort((a, b) => a.localeCompare(b)),
+    [activeRecipes],
+  );
+
   const scoredRecipes = useMemo(() => {
-    return RECIPES.map((recipe) => {
+    return activeRecipes.map((recipe) => {
       const matched = recipe.ingredients.filter((item) => have.has(item));
       const missing = recipe.ingredients.filter((item) => !have.has(item));
       const blocked = recipe.ingredients.filter((item) => avoid.has(item));
@@ -332,13 +343,13 @@ export default function Home() {
       .sort((a, b) => sort === "fastest"
         ? a.time - b.time
         : b.matched.length - a.matched.length || b.score - a.score || a.time - b.time);
-  }, [avoid, have, sort]);
+  }, [activeRecipes, avoid, have, sort]);
 
-  const visibleIngredients = PANTRY_INGREDIENTS.filter((ingredient) =>
+  const visibleIngredients = pantryIngredients.filter((ingredient) =>
     ingredient.includes(query.trim().toLowerCase()),
   );
 
-  const activeRecipe = RECIPES.find((recipe) => recipe.id === activeRecipeId) ?? null;
+  const activeRecipe = ALL_RECIPES.find((recipe) => recipe.id === activeRecipeId) ?? null;
 
   useEffect(() => {
     if (activeRecipeId) setPortions(2);
@@ -396,6 +407,16 @@ export default function Home() {
     };
   }, [activeRecipe]);
 
+
+  function switchFoodMode(nextMode: FoodMode) {
+    if (nextMode === foodMode) return;
+    setFoodMode(nextMode);
+    setQuery("");
+    setSurprise(null);
+    setOpenSwap(null);
+    setActiveRecipeId(null);
+  }
+
   function cycleIngredient(ingredient: string) {
     setPantry((current) => {
       const next = { ...current };
@@ -447,19 +468,30 @@ export default function Home() {
           <span className="theme-toggle-track" aria-hidden="true"><i /></span>
           <span className="theme-toggle-label">Pink palette</span>
         </button>
-        <button className="small-surprise" onClick={chooseForMe} type="button" aria-label="Choose a surprise recipe"><ShuffleIcon /> <span>Surprise me</span></button>
+        <button className="small-surprise" onClick={chooseForMe} type="button" aria-label={`Choose a surprise ${foodMode === "dessert" ? "dessert" : "recipe"}`}><ShuffleIcon /> <span>Surprise me</span></button>
       </header>
 
       <section className="intro" id="top">
-        <div className="eyebrow"><span /> Hopefully recipes you actually want to cook</div>
-        <h1>Lets see you not know what<br /><em>to cook ever again</em></h1>
-        <p>Tell me what’s in your kitchen. I’ll find the vegetarian recipes that fit and clever swaps for what doesn’t.</p>
+        <div className="eyebrow"><span /> {foodMode === "dessert" ? "Hopefully desserts you actually want to make" : "Hopefully recipes you actually want to cook"}</div>
+        <h1>Lets see you not know what<br /><em>{foodMode === "dessert" ? "to bake ever again" : "to cook ever again"}</em></h1>
+        <p>{foodMode === "dessert"
+          ? "Tell me what’s in your kitchen. I’ll find the desserts you can pull off and clever swaps for what’s missing."
+          : "Tell me what’s in your kitchen. I’ll find the vegetarian recipes that fit and clever swaps for what doesn’t."}
+        </p>
+        <div className="food-switcher" role="group" aria-label="Recipe type">
+          <button type="button" className={foodMode === "savory" ? "active" : ""} aria-pressed={foodMode === "savory"} onClick={() => switchFoodMode("savory")}>
+            <span aria-hidden="true">◐</span> Savory
+          </button>
+          <button type="button" className={foodMode === "dessert" ? "active" : ""} aria-pressed={foodMode === "dessert"} onClick={() => switchFoodMode("dessert")}>
+            <span aria-hidden="true">✦</span> Desserts
+          </button>
+        </div>
       </section>
 
       <section className="pantry-shell" id="pantry">
         <div className="pantry-heading">
-          <div><span className="step">01</span><h2>What’s in your kitchen?</h2><p>Tap once if you have it. Tap twice to mark it missing.</p></div>
-          <div className="pantry-count" aria-live="polite"><strong>{have.size}</strong> have <span>·</span> <strong>{avoid.size}</strong> don’t have</div>
+          <div><span className="step">01</span><h2>{foodMode === "dessert" ? "What’s in your baking cupboard?" : "What’s in your kitchen?"}</h2><p>Tap once if you have it. Tap twice to mark it missing.</p></div>
+          <div className="pantry-count" aria-live="polite"><strong>{pantryIngredients.filter((item) => have.has(item)).length}</strong> have <span>·</span> <strong>{pantryIngredients.filter((item) => avoid.has(item)).length}</strong> don’t have</div>
         </div>
 
         <div className="pantry-toolbar">
@@ -492,13 +524,13 @@ export default function Home() {
       </section>
 
       <section className="decision-strip" aria-labelledby="decision-title">
-        <div><span className="decision-kicker">Can’t decide?</span><h2 id="decision-title">I don’t know what to eat.</h2></div>
-        <button type="button" onClick={chooseForMe} disabled={!scoredRecipes.length}><ShuffleIcon /> Choose for me</button>
+        <div><span className="decision-kicker">Can’t decide?</span><h2 id="decision-title">{foodMode === "dessert" ? "I don’t know what sweet thing to make." : "I don’t know what to eat."}</h2></div>
+        <button type="button" onClick={chooseForMe} disabled={!scoredRecipes.length}><ShuffleIcon /> {foodMode === "dessert" ? "Pick a dessert" : "Choose for me"}</button>
       </section>
 
       <section className="results" id="recipe-results">
         <div className="results-heading">
-          <div><span className="step">02</span><h2>Cookable right now</h2><p>{scoredRecipes.length} recipes without your missing ingredients.</p></div>
+          <div><span className="step">02</span><h2>{foodMode === "dessert" ? "Sweet things you can make" : "Cookable right now"}</h2><p>{scoredRecipes.length} {foodMode === "dessert" ? "desserts" : "recipes"} without your missing ingredients.</p></div>
           <label className="sort-control"><span>Sort by</span><select value={sort} onChange={(event) => setSort(event.target.value as "match" | "fastest")}><option value="match">Best match</option><option value="fastest">Fastest</option></select></label>
         </div>
 
@@ -559,9 +591,11 @@ export default function Home() {
                 <div className="modal-section-title"><span>What you’ll need</span><em>{activeRecipe.ingredients.filter((item) => have.has(item)).length}/{activeRecipe.ingredients.length} matched</em></div>
                 <ul>
                   {activeRecipe.ingredients.map((ingredient, index) => {
-                    const alternatives = SWAPS[ingredient] ?? [];
+                    const alternatives = foodMode === "dessert"
+                      ? DESSERT_SWAPS[ingredient] ?? SWAPS[ingredient] ?? []
+                      : SWAPS[ingredient] ?? DESSERT_SWAPS[ingredient] ?? [];
                     const isOpen = openSwap === ingredient;
-                    const baseQuantity = QUANTITIES[activeRecipe.id]?.[index] ?? "as needed";
+                    const baseQuantity = ALL_QUANTITIES[activeRecipe.id]?.[index] ?? "as needed";
                     const quantity = scaleQuantity(baseQuantity, portions);
                     return (
                       <li key={ingredient} className={have.has(ingredient) ? "owned" : avoid.has(ingredient) ? "unavailable" : "needed"}>
@@ -573,7 +607,7 @@ export default function Home() {
                   })}
                 </ul>
                 <p className="staples"><strong>Plus pantry staples:</strong> {activeRecipe.staples.map((staple, index) => {
-                  const amount = STAPLE_QUANTITIES[activeRecipe.id]?.[index];
+                  const amount = ALL_STAPLE_QUANTITIES[activeRecipe.id]?.[index];
                   return amount ? `${scaleQuantity(amount, portions)} ${staple}` : staple;
                 }).join(", ")}.</p>
               </div>
@@ -582,7 +616,7 @@ export default function Home() {
                 <ol>
                   {(STEPS[activeRecipe.id] ?? []).map((step, index) => <li key={step}><b>{index + 1}</b><p>{step}</p></li>)}
                 </ol>
-                <div className="cook-note"><span>Dag&apos;s notes</span><p>{DAGS_NOTES[activeRecipe.id]}</p></div>
+                <div className="cook-note"><span>Dag&apos;s notes</span><p>{ALL_NOTES[activeRecipe.id]}</p></div>
               </div>
             </div>
           </section>
