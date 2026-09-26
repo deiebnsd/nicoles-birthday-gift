@@ -96,6 +96,14 @@ const ALL_QUANTITIES: Record<string, string[]> = { ...QUANTITIES, ...DESSERT_QUA
 const ALL_STAPLE_QUANTITIES: Record<string, string[]> = { ...STAPLE_QUANTITIES, ...DESSERT_STAPLE_QUANTITIES };
 const ALL_NOTES: Record<string, string> = { ...DAGS_NOTES, ...DESSERT_NOTES };
 
+const RECIPE_SOURCES: Record<string, { label: string; url: string }> = {
+  "cooktoria-chickpea-gyros": { label: "Cooktoria", url: "https://cooktoria.com/vegetarian-gyros/" },
+  "chelsea-chickpea-gyros": { label: "Chelsea’s Messy Apron", url: "https://www.chelseasmessyapron.com/vegetarian-gyros/" },
+  "portobello-gyros": { label: "Live Eat Learn", url: "https://www.liveeatlearn.com/vegetarian-portobello-mushroom-gyros/" },
+  "king-oyster-gyros": { label: "Ale Cooks", url: "https://www.alecooks.com/vegetarian-gyro-with-king-oyster-mushrooms/" },
+  "tofu-fries-gyros": { label: "School Night Vegan", url: "https://schoolnightvegan.com/home/vegan-gyros-with-tzatziki/" },
+};
+
 const DEFAULT_PANTRY: Record<string, PantryState> = {
   chickpeas: "have", spinach: "have", tomatoes: "have", garlic: "have",
   lemon: "have", rice: "have", tofu: "avoid",
@@ -106,6 +114,7 @@ const SWAPS: Record<string, string[]> = {
   spinach: ["kale", "Swiss chard"],
   cream: ["oat cream", "coconut cream"],
   tofu: ["tempeh", "chickpeas"],
+  "french fries": ["oven-baked potato wedges", "sweet potato fries"],
   rice: ["quinoa", "cauliflower rice"],
   cucumber: ["shredded cabbage", "radishes"],
   gochujang: ["sriracha + miso", "harissa"],
@@ -201,6 +210,11 @@ const SWAPS: Record<string, string[]> = {
   quinoa: ["couscous", "bulgur wheat"],
   farro: ["pearl barley", "brown rice"],
   "butternut squash": ["sweet potato", "pumpkin"],
+  "pita bread": ["flatbread", "soft tortillas"],
+  lettuce: ["rocket", "shredded cabbage"],
+  "portobello mushrooms": ["large flat mushrooms", "aubergine"],
+  "king oyster mushrooms": ["portobello mushrooms", "firm tofu"],
+  "red wine vinegar": ["lemon juice", "white wine vinegar"],
   macaroni: ["small shells", "short pasta"],
 };
 
@@ -617,6 +631,9 @@ export default function Home() {
                   {(STEPS[activeRecipe.id] ?? []).map((step, index) => <li key={step}><b>{index + 1}</b><p>{step}</p></li>)}
                 </ol>
                 <div className="cook-note"><span>Dag&apos;s notes</span><p>{ALL_NOTES[activeRecipe.id]}</p></div>
+                {RECIPE_SOURCES[activeRecipe.id] && (
+                  <p className="recipe-source">Inspired by <a href={RECIPE_SOURCES[activeRecipe.id].url} target="_blank" rel="noreferrer">{RECIPE_SOURCES[activeRecipe.id].label}</a>. Pantryful wording and quantities are adapted for this site.</p>
+                )}
               </div>
             </div>
           </section>

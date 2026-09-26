@@ -307,6 +307,32 @@ export const RECIPES: Recipe[] = [
     ["quinoa", "avocado", "broccoli", "cucumber", "yogurt"], ["lemon juice", "olive oil", "salt"], "forest",
     ["Cook quinoa and steam the broccoli until crisp-tender.", "Blend or stir yogurt with lemon, olive oil and chopped herbs if available.", "Build bowls with quinoa, broccoli, cucumber and avocado, then spoon over the sauce."],
   ),
+
+  recipe(
+    "cooktoria-chickpea-gyros", "Paprika chickpea gyros", "Crisp paprika-cayenne chickpeas, cool cucumber tzatziki and fresh salad tucked into warm pita.", 35, "Easy", "Greek-inspired",
+    ["chickpeas", "pita bread", "tomatoes", "lettuce", "red onion", "cucumber", "yogurt", "lemon", "garlic", "dill", "feta"], ["olive oil", "paprika", "cayenne pepper", "fine salt", "black pepper"], "citrus",
+    ["Heat the oven to 200°C/180°C fan. Drain and rinse the chickpeas, then dry them very thoroughly with a clean tea towel or kitchen paper.", "Toss the chickpeas with half the olive oil, paprika, cayenne and half the salt. Spread them on a tray in one layer and roast for 18–20 minutes, shaking the tray once, until crisp at the edges but still tender inside.", "Meanwhile, coarsely grate half the cucumber and squeeze it firmly to remove excess water. Mix it with the yogurt, half the lemon juice, grated garlic, chopped dill, remaining olive oil and a pinch of salt and black pepper.", "Dice the tomatoes, shred the lettuce, thinly slice the red onion and slice the remaining cucumber. Crumble the feta.", "Warm the pita in a dry frying pan for 20–30 seconds per side, or wrap the stack in a slightly damp tea towel and warm briefly in the microwave.", "Spread each pita generously with tzatziki, then add the roasted chickpeas, lettuce, tomato, cucumber, red onion and feta. Finish with the remaining lemon cut into wedges and serve straight away."],
+  ),
+  recipe(
+    "chelsea-chickpea-gyros", "Herby roasted chickpea gyros", "Oregano-basil roasted chickpeas with hummus, crunchy vegetables, feta and bright lemon tzatziki.", 40, "Easy", "Weeknight",
+    ["chickpeas", "pita bread", "hummus", "cucumber", "yogurt", "lemon", "red wine vinegar", "lettuce", "red onion", "tomatoes", "feta"], ["olive oil", "paprika", "dried oregano", "dried basil", "garlic powder", "fine salt", "black pepper"], "tomato",
+    ["Heat the oven to 200°C/180°C fan. Drain, rinse and dry the chickpeas very well; any surface moisture will stop them browning properly.", "Toss the chickpeas with most of the olive oil, paprika, oregano, basil, garlic powder, salt and black pepper. Spread them out on a large tray and roast for 18–22 minutes, shaking halfway, until crisp but not hard.", "Grate about a third of the cucumber, squeeze it dry, then mix with the yogurt, red wine vinegar, half the lemon juice, a little lemon zest, the remaining olive oil and a pinch of salt.", "Thinly slice the remaining cucumber and red onion, chop the tomatoes and shred the lettuce. Crumble the feta.", "Warm the pita until soft and pliable. Spread with hummus and a spoonful of the lemon tzatziki, then press the roasted chickpeas lightly into the sauce so they stay put.", "Pile on lettuce, cucumber, tomato, red onion and feta. Spoon over more tzatziki, squeeze over the remaining lemon and eat while the chickpeas are still warm."],
+  ),
+  recipe(
+    "portobello-gyros", "Portobello mushroom gyros", "Deeply browned lemon-oregano portobellos with tzatziki, tomato, onion and feta in warm pita.", 20, "Easy", "Quick dinner",
+    ["portobello mushrooms", "pita bread", "cucumber", "yogurt", "lemon", "garlic", "dill", "tomatoes", "red onion", "lettuce", "feta", "soy sauce"], ["olive oil", "dried oregano", "smoked paprika", "fine salt", "black pepper"], "forest",
+    ["Wipe the portobellos clean and slice them into strips about 1 cm thick. Mix half the olive oil with the soy sauce, half the lemon juice, half the garlic, oregano, smoked paprika and black pepper, then toss with the mushrooms.", "Heat a large frying pan over medium-high heat. Cook the mushrooms in a single layer for 5–7 minutes, turning once or twice, until deeply browned and tender; work in two batches if the pan is crowded.", "While the mushrooms cook, grate about a third of the cucumber and squeeze it dry. Stir it into the yogurt with the remaining garlic, chopped dill, a squeeze of lemon and a pinch of salt.", "Slice the remaining cucumber, tomatoes and red onion, shred the lettuce and crumble the feta. Warm the pita in a dry pan until soft and lightly toasted.", "Spread the pita with tzatziki, add lettuce and the hot portobello strips, then top with tomato, cucumber, red onion and feta.", "Finish with the remaining lemon and a little black pepper. Fold and serve immediately so the mushrooms stay juicy and the pita stays warm."],
+  ),
+  recipe(
+    "king-oyster-gyros", "King oyster mushroom gyros", "Golden roasted king oyster mushrooms marinated with lemon, garlic and oregano, finished with cool tzatziki and crisp vegetables.", 30, "Easy", "Mushroom night",
+    ["king oyster mushrooms", "pita bread", "cucumber", "yogurt", "lemon", "garlic", "dill", "tomatoes", "red onion", "lettuce", "feta"], ["olive oil", "dried oregano", "fine salt", "black pepper", "chilli flakes"], "citrus",
+    ["Heat the oven to 220°C/200°C fan. Slice the king oyster mushroom stems lengthways into thin, broad strips and tear any large caps into bite-sized pieces.", "Whisk most of the olive oil with half the lemon juice, half the garlic, oregano, chilli flakes, salt and black pepper. Toss with the mushrooms and leave for 10 minutes while the oven finishes heating.", "Spread the mushrooms over a large tray in one layer. Roast for 12–15 minutes, turning once, until golden at the edges and tender through the centre.", "Meanwhile, grate about a third of the cucumber and squeeze it very dry. Mix with the yogurt, remaining garlic, chopped dill, a squeeze of lemon, the remaining olive oil and a pinch of salt.", "Slice the remaining cucumber, tomatoes and red onion and shred the lettuce. Warm the pita in a dry pan or low oven and crumble the feta.", "Spread each warm pita with tzatziki, add lettuce and roasted mushrooms, then top with tomato, cucumber, red onion and feta. Finish with lemon and serve straight away."],
+  ),
+  recipe(
+    "tofu-fries-gyros", "Crispy tofu gyros with fries", "Lemon-oregano tofu, cool tzatziki, fresh tomato and onion, with hot crispy fries tucked right inside the pita.", 45, "Easy", "Greek street food",
+    ["tofu", "french fries", "pita bread", "yogurt", "cucumber", "lemon", "garlic", "tomatoes", "red onion", "dill", "parsley"], ["olive oil", "dried oregano", "paprika", "fine salt", "black pepper"], "saffron",
+    ["Heat the oven to the temperature recommended for the fries. Cook the fries until deeply golden and crisp, timing them so they finish just before you assemble the gyros.", "Pat the tofu dry and tear or slice it into chunky strips. Mix half the olive oil with half the lemon juice, grated garlic, oregano, paprika, salt and black pepper, then coat the tofu and leave it for 10 minutes.", "Heat a large non-stick frying pan over medium-high heat. Cook the tofu for 7–9 minutes, turning carefully, until browned and lightly crisp on several sides. Keep it warm while you finish the toppings.", "Grate about a third of the cucumber and squeeze out as much water as you can. Stir it into the yogurt with chopped dill, a squeeze of lemon and a pinch of salt to make a quick tzatziki.", "Slice the remaining cucumber, tomatoes and red onion. Chop the parsley. Warm the pita in a dry pan for 20–30 seconds per side until soft and pliable.", "Spread each warm pita with tzatziki, add the hot tofu, tomato, cucumber and red onion, then tuck a generous handful of the crispy fries directly into the pita. Finish with dill, parsley and the remaining lemon, fold tightly and serve immediately."],
+  ),
 ];
 
 export const STEPS: Record<string, string[]> = Object.fromEntries(
@@ -370,6 +396,11 @@ export const DAGS_NOTES: Record<string, string> = {
   "cauliflower-mac": "Undercook both the macaroni and cauliflower slightly; they continue softening in the oven while the top turns golden.",
   "baked-feta-beans": "Use a wide baking dish so the tomatoes blister rather than steam, and stir the feta through only after it comes out of the oven.",
   "green-goddess-quinoa": "Let the quinoa and broccoli cool before adding avocado and herb yogurt, or the greens lose their bright colour and freshness.",
+  "cooktoria-chickpea-gyros": "Dry the chickpeas thoroughly before seasoning; that one minute of effort is the difference between roasted and merely warmed beans.",
+  "chelsea-chickpea-gyros": "Give the chickpeas real space on the tray and keep the tzatziki cold until serving—the hot-cold contrast makes this version especially good.",
+  "portobello-gyros": "Do not overcrowd the pan. Portobellos release a lot of water, so two quick batches brown better than one large steaming batch.",
+  "king-oyster-gyros": "Slice the thick stems lengthways rather than into coins; the long strips get crisp edges and fold into the pita much more like a gyro filling.",
+  "tofu-fries-gyros": "Get the fries properly crisp and add them at the very last second. They should stay hot and crunchy inside the cool tzatziki rather than soften while you prep everything else.",
 };
 
 export const ADDITIONAL_RECIPES = RECIPES.slice(6);
@@ -523,6 +554,11 @@ const RECIPE_QUANTITIES: Record<string, string[]> = {
   "pea-mint-risotto": ["160 g", "250 g", "15 g", "60 g", "1", "1 small", "2 cloves", "750 ml", "100 ml", "30 g", "100 g", "15 g"],
   "squash-farro": ["500 g", "150 g", "100 g", "60 g", "30 g", "1 small", "240 g drained", "1", "20 g", "10 g", "120 g", "1 clove"],
   "cauliflower-mac": ["180 g", "350 g", "120 g", "350 ml", "1 tsp", "½ small", "2 cloves", "40 g", "50 g", "10 g", "½", "80 g"],
+  "cooktoria-chickpea-gyros": ["240 g drained", "2 large", "2 medium", "80 g", "½ small", "1 small", "120 g", "1", "1 clove", "10 g", "80 g"],
+  "chelsea-chickpea-gyros": ["240 g drained", "2 large", "60 g", "1 small", "120 g", "1", "2 tsp", "80 g", "½ small", "180 g", "80 g"],
+  "portobello-gyros": ["300 g", "2 large", "1 small", "120 g", "1", "1 clove", "10 g", "180 g", "½ small", "80 g", "80 g", "1 tbsp"],
+  "king-oyster-gyros": ["300 g", "2 large", "1 small", "120 g", "1", "2 cloves", "10 g", "180 g", "½ small", "80 g", "80 g"],
+  "tofu-fries-gyros": ["280 g", "200 g", "2 large", "150 g", "1 small", "1", "1 clove", "2 medium", "½ small", "10 g", "10 g"],
 };
 
 export const STAPLE_QUANTITIES: Record<string, string[]> = {
@@ -578,6 +614,11 @@ export const STAPLE_QUANTITIES: Record<string, string[]> = {
   "pea-mint-risotto": ["1.5 tbsp", "½ tsp", "to taste"],
   "squash-farro": ["3 tbsp", "¾ tsp", "to taste", "1 tsp", "1 tsp", "750 ml"],
   "cauliflower-mac": ["40 g", "2.5 tbsp", "¾ tsp", "to taste", "¼ tsp"],
+  "cooktoria-chickpea-gyros": ["1.5 tbsp", "1 tsp", "⅛ tsp", "½ tsp", "to taste"],
+  "chelsea-chickpea-gyros": ["2 tbsp", "1.5 tsp", "1 tsp", "½ tsp", "½ tsp", "½ tsp", "to taste"],
+  "portobello-gyros": ["2 tbsp", "1 tsp", "½ tsp", "½ tsp", "to taste"],
+  "king-oyster-gyros": ["2 tbsp", "1 tsp", "½ tsp", "to taste", "¼ tsp"],
+  "tofu-fries-gyros": ["2 tbsp", "1.5 tsp", "1 tsp", "½ tsp", "to taste"],
 };
 
 export const QUANTITIES: Record<string, string[]> = Object.fromEntries(
